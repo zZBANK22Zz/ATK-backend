@@ -19,4 +19,15 @@ model User {
   email    String @unique
   password String
   createdAt DateTime @default(now())
+  atkResults AtkResult[]
+}
+
+model AtkResult {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  result    String
+  imageUrl  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
 }
