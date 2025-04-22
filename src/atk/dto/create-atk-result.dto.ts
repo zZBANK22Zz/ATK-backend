@@ -21,7 +21,7 @@ export class CreateAtkResultDto {
   @IsNotEmpty()
   result: ATKResult;
 
-  @IsOptional() // ✅ This is the fix!
+  @IsOptional()
   @IsString()
   imageUrl: string;
 }
