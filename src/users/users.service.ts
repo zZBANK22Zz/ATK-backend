@@ -40,4 +40,11 @@ export class UsersService {
 
     return { message: 'Login successful', user };
   }
+
+  async findByUsername(username: string) {
+    // Example using in-memory or database
+    return this.prisma.user.findUnique({
+      where: { username }, // adapt to your schema (maybe it's `email`)
+    });
+  }
 }

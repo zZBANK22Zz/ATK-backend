@@ -1,15 +1,17 @@
-import { Controller, Get, Post, Body, Param, UseInterceptors, UploadedFile, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseInterceptors, UploadedFile, UsePipes, ValidationPipe, UseGuards } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AtkService } from './atk.service';
 import { CreateAtkResultDto } from './dto/create-atk-result.dto';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { SessionGuard } from 'src/auth/session.guard';
 
 @Controller('atk')
 export class AtkController {
   constructor(private readonly atkService: AtkService) {}
 
   @Post()
+  @UseGuards(SessionGuard)
   @UsePipes(new ValidationPipe({ transform: true }))
   @UseInterceptors(
     FileInterceptor('image', {
