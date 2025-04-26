@@ -18,7 +18,10 @@ export class AuthController {
             email: req.user.email
         };
 
-        return { message: 'Loged in successfully' };
+        return { message: 'Loged in successfully', user: {
+            id: req.user.id,
+            username: req.user.username,
+        } };
     }
 
     @Get('')
